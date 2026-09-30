@@ -1,16 +1,167 @@
-const vehicles = [
-  {name:'Renault Clio', category:'Citadine', price:'250 DH', seats:'5 places', transmission:'Manuelle', fuel:'Essence', image:'https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80', description:'Une citadine pratique et agréable, idéale pour vos déplacements quotidiens et vos escapades.'},
-  {name:'Dacia Logan', category:'Berline', price:'280 DH', seats:'5 places', transmission:'Manuelle', fuel:'Essence', image:'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=900&q=80', description:'Une berline spacieuse et fiable qui offre confort et simplicité pour toute la famille.'},
-  {name:'Dacia Sandero', category:'Citadine', price:'270 DH', seats:'5 places', transmission:'Manuelle', fuel:'Essence', image:'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=900&q=80', description:'Un véhicule polyvalent, économique et confortable pour vos trajets à Oulad Teima et au-delà.'}
+/* ==========================================================
+   HRS CAR | script.js
+   - Modifiez CONFIG et CARS ci-dessous pour mettre à jour le site
+   ========================================================== */
+'use strict';
+
+const CONFIG = {
+  brand: 'HRS CAR',
+  whatsapp: '212661614048' // format international, sans + ni espaces
+};
+
+/* Pour afficher une vraie photo : mettez le chemin dans "image",
+   par ex. image: 'images/clio.jpg'. Sans image, une silhouette est affichée. */
+const CARS = [
+  { id: 'clio',    name: 'Renault Clio',  type: 'Citadine', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: '' },
+  { id: 'logan',   name: 'Dacia Logan',   type: 'Berline',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: '' },
+  { id: 'sandero', name: 'Dacia Sandero', type: 'Citadine', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: '' }
 ];
-const grid=document.querySelector('#vehicle-grid'); const featureIcon={seats:'♙',transmission:'⚙',fuel:'◉'};
-grid.innerHTML=vehicles.map((v,i)=>`<article class="vehicle-card reveal"><div class="vehicle-image"><img src="${v.image}" alt="${v.name} en location chez HRS CAR" loading="lazy"><span class="category">${v.category}</span></div><div class="vehicle-info"><div class="vehicle-title"><h3>${v.name}</h3><span class="price">Dès ${v.price}<small> / jour</small></span></div><div class="features"><span>${featureIcon.seats} ${v.seats}</span><span>${featureIcon.transmission} ${v.transmission}</span><span>${featureIcon.fuel} ${v.fuel}</span><span>❄ Climatisation</span></div><button class="details-link" data-vehicle="${i}">Voir les détails&nbsp; →</button></div></article>`).join('');
-const modal=document.querySelector('#vehicle-modal'); const modalContent=document.querySelector('#modal-content');
-function showVehicle(i){const v=vehicles[i];modalContent.innerHTML=`<img class="modal-image" src="${v.image}" alt="${v.name}"><div class="modal-body"><p class="eyebrow">${v.category} · HRS CAR</p><h2>${v.name}</h2><strong class="price">À partir de ${v.price} / jour</strong><div class="features"><span>♙ ${v.seats}</span><span>⚙ ${v.transmission}</span><span>◉ ${v.fuel}</span><span>❄ Climatisation</span></div><p>${v.description}</p><form id="modal-booking"><div class="form-row"><label>Date de départ<input required type="date"></label><label>Date de retour<input required type="date"></label></div><button class="button" type="submit">Demander une réservation <span>→</span></button><p class="form-note" id="modal-message"></p></form></div>`;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.querySelector('#modal-booking').addEventListener('submit',e=>{e.preventDefault();document.querySelector('#modal-message').textContent='Votre demande est prête. Contactez HRS CAR au 0661614048 ou au 0649787878 pour confirmer la disponibilité.'});}
-grid.addEventListener('click',e=>{const button=e.target.closest('[data-vehicle]');if(button)showVehicle(button.dataset.vehicle)});
-document.querySelector('.modal-close').addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')});modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
-document.querySelector('.menu-toggle').addEventListener('click',e=>{const links=document.querySelector('.nav-links');const open=links.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)});document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
-window.addEventListener('scroll',()=>document.querySelector('.site-header').classList.toggle('scrolled',scrollY>40));
-document.querySelector('#search-form').addEventListener('submit',e=>{e.preventDefault();document.querySelector('#search-message').textContent='Merci ! Consultez nos véhicules ci-dessous et envoyez-nous votre demande.';document.querySelector('#voitures').scrollIntoView({behavior:'smooth'})});document.querySelector('#contact-form').addEventListener('submit',e=>{e.preventDefault();document.querySelector('#contact-message').textContent='Merci pour votre demande. HRS CAR vous répondra prochainement au 0661614048 ou au 0649787878.';e.target.reset()});
-const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal, .benefit-grid article, .service-grid article, .review-grid article').forEach(el=>{el.classList.add('reveal');observer.observe(el)});
-const today=new Date().toISOString().split('T')[0];document.querySelectorAll('input[type=date]').forEach(input=>input.min=today);
+
+/* ---------- Utilitaires ---------- */
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const icon = name => `<svg class="ic" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
+
+const todayISO = () => {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 10);
+};
+const formatDate = iso =>
+  new Date(iso + 'T00:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+
+/* ---------- État de la recherche ---------- */
+const state = { type: 'all', start: '', end: '' };
+
+function rentalDays() {
+  if (!state.start || !state.end) return 0;
+  const diff = Math.round((new Date(state.end) - new Date(state.start)) / 864e5);
+  return Math.max(1, diff);
+}
+
+function reservationMessage(car) {
+  let msg = `Bonjour ${CONFIG.brand}, je souhaite réserver la ${car.name} (${car.price} DH/jour).`;
+  const days = rentalDays();
+  if (days) {
+    msg += ` Du ${formatDate(state.start)} au ${formatDate(state.end)} (${plural(days, 'jour')}), total estimé : ${car.price * days} DH.`;
+  }
+  return msg + ' Est-elle disponible ?';
+}
+
+/* ---------- Rendu des voitures ---------- */
+const grid = $('#car-grid');
+const results = $('#results');
+
+function carCard(car) {
+  const days = rentalDays();
+  const media = car.image
+    ? `<img src="${car.image}" alt="${car.name}" loading="lazy" width="640" height="400">`
+    : `<svg class="car-art" viewBox="0 0 320 130" style="color:${car.color}" role="img" aria-label="${car.name}"><use href="#car-shape"/></svg>`;
+
+  return `
+    <article class="car-card">
+      <div class="car-media">
+        ${media}
+        <span class="badge">${car.type}</span>
+      </div>
+      <div class="car-body">
+        <h3>${car.name}</h3>
+        <ul class="specs">
+          <li>${icon('user')} ${car.seats} places</li>
+          <li>${icon('gear')} ${car.gearbox}</li>
+          ${car.ac ? `<li>${icon('snow')} Climatisation</li>` : ''}
+        </ul>
+        <div class="car-foot">
+          <div>
+            <p class="price"><strong>${car.price} DH</strong> <span>/ jour</span></p>
+            ${days ? `<p class="total">Total estimé : ${car.price * days} DH pour ${plural(days, 'jour')}</p>` : ''}
+          </div>
+          <a class="btn btn-dark" href="${waLink(reservationMessage(car))}" target="_blank" rel="noopener"
+             aria-label="Réserver la ${car.name} sur WhatsApp">Réserver</a>
+        </div>
+      </div>
+    </article>`;
+}
+
+function render() {
+  const list = CARS.filter(c => state.type === 'all' || c.type === state.type);
+  const days = rentalDays();
+  const filtered = state.type !== 'all' || days > 0;
+
+  grid.innerHTML = list.length
+    ? list.map(carCard).join('')
+    : '<p class="empty">Aucune voiture de ce type pour le moment. Appelez-nous au 06 61 61 40 48.</p>';
+
+  let text = plural(list.length, 'voiture') + ' affichée' + (list.length > 1 ? 's' : '');
+  if (days) text += ` pour ${plural(days, 'jour')}, du ${formatDate(state.start)} au ${formatDate(state.end)}`;
+  results.innerHTML = filtered ? `${text}. <button type="button" id="reset">Tout afficher</button>` : '';
+}
+
+/* ---------- Formulaire de recherche ---------- */
+const searchForm = $('#search-form');
+const startInput = $('#start');
+const endInput = $('#end');
+const typeSelect = $('#type');
+
+startInput.min = endInput.min = todayISO();
+
+startInput.addEventListener('change', () => {
+  endInput.min = startInput.value || todayISO();
+  if (endInput.value && endInput.value < startInput.value) endInput.value = startInput.value;
+});
+
+searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  state.type = typeSelect.value;
+  state.start = startInput.value;
+  state.end = endInput.value;
+  render();
+  $('#voitures').scrollIntoView({ behavior: 'smooth' });
+});
+
+results.addEventListener('click', e => {
+  if (e.target.id !== 'reset') return;
+  Object.assign(state, { type: 'all', start: '', end: '' });
+  searchForm.reset();
+  render();
+});
+
+/* ---------- Liens WhatsApp génériques ---------- */
+document.querySelectorAll('[data-wa]').forEach(a => {
+  a.href = waLink(a.dataset.wa);
+});
+
+/* ---------- Formulaire de contact ---------- */
+const carSelect = $('#c-car');
+carSelect.innerHTML =
+  '<option value="">Je ne sais pas encore</option>' +
+  CARS.map(c => `<option value="${c.name}">${c.name} (${c.price} DH/jour)</option>`).join('');
+
+$('#contact-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const parts = [
+    `Bonjour ${CONFIG.brand}, je m'appelle ${f.get('name').trim()}.`,
+    `Mon téléphone : ${f.get('phone').trim()}.`
+  ];
+  if (f.get('car')) parts.push(`Voiture souhaitée : ${f.get('car')}.`);
+  if (f.get('message').trim()) parts.push(f.get('message').trim());
+  window.open(waLink(parts.join(' ')), '_blank', 'noopener');
+});
+
+/* ---------- Menu mobile ---------- */
+const nav = $('#nav');
+const burger = $('#burger');
+
+function setMenu(open) {
+  nav.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+}
+burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+
+/* ---------- Init ---------- */
+$('#year').textContent = new Date().getFullYear();
+render();
