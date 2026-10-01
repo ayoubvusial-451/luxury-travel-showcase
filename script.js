@@ -12,9 +12,10 @@ const CONFIG = {
 /* Pour afficher une vraie photo : mettez le chemin dans "image",
    par ex. image: 'images/clio.jpg'. Sans image, une silhouette est affichée. */
 const CARS = [
-  { id: 'clio',    name: 'Renault Clio',  type: 'Citadine', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'images/Renault Clio.jfif' },
-  { id: 'logan',   name: 'Dacia Logan',   type: 'Berline',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'images/The new Dacia Logan from 8,400 euros (1).jfif' },
-  { id: 'sandero', name: 'Dacia Sandero', type: 'Citadine', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'images/dacia-sandero-manual-gasoline.webp' }
+  { id: 'clio',    name: 'Renault Clio',  type: 'Manuelle', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'images/Renault Clio.jfif' },
+  { id: 'logan',   name: 'Dacia Logan',   type: 'Manuelle',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'Dacia_Logan_2025.avif
+' },
+  { id: 'sandero', name: 'Dacia Sandero', type: 'Manuelle', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'images/dacia-sandero-manual-gasoline.webp' }
 ];
 
 /* ---------- Utilitaires ---------- */
