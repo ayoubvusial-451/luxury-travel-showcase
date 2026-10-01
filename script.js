@@ -12,9 +12,9 @@ const CONFIG = {
 /* Pour afficher une vraie photo : mettez le chemin dans "image",
    par ex. image: 'images/clio.jpg'. Sans image, une silhouette est affichée. */
 const CARS = [
-  { id: 'clio',    name: 'Renault Clio',  type: 'Manuelle', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'clio.jpg' },
-  { id: 'logan',   name: 'Dacia Logan',   type: 'Manuelle',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'Dacia_Logan.png' },
-  { id: 'sandero', name: 'Dacia Sandero', type: 'Manuelle', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'sandero.webp' }
+  { id: 'clio',    name: 'Renault Clio',  type: 'Manuelle', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'images/clio.jpg' },
+  { id: 'logan',   name: 'Dacia Logan',   type: 'Manuelle',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'images/Dacia_Logan.png' },
+  { id: 'sandero', name: 'Dacia Sandero', type: 'Manuelle', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'images/sandero.webp' }
 ];
 
 /* ---------- Utilitaires ---------- */
