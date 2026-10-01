@@ -165,3 +165,17 @@ nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); 
 /* ---------- Init ---------- */
 $('#year').textContent = new Date().getFullYear();
 render();
+/* =========================================
+   Header Carousel Script (Agence Locale)
+   ========================================= */
+
+const headerItems = document.querySelectorAll('.header-carousel-item');
+let currentHeaderIndex = 0;
+
+function showNextHeaderItem() {
+  headerItems[currentHeaderIndex].classList.remove('active');
+  currentHeaderIndex = (currentHeaderIndex + 1) % headerItems.length;
+  headerItems[currentHeaderIndex].classList.add('active');
+}
+
+setInterval(showNextHeaderItem, 5000); // يدوز أوتوماتيكياً كل 5 ثواني
