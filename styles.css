@@ -518,3 +518,38 @@ ul, ol { padding: 0; list-style: none; }
   background: #111;
   border-radius: 10px;
 }
+/* =========================================
+   Header Carousel (Agence Locale)
+   ========================================= */
+
+.header-carousel-container {
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.header-carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.header-carousel-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.header-carousel-item.active {
+  opacity: 1;
+}
+
+/* Animation fadeIn الخفيف */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header-carousel-item.active {
+  animation: fadeIn 1s ease-in-out forwards;
+}
