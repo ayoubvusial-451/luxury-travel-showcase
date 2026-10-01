@@ -466,4 +466,55 @@ ul, ol { padding: 0; list-style: none; }
   font-size: 0.85rem;
   color: #888;
 }
+/* =========================================
+   Carousel Layout (Comment ça marche & Reviews)
+   ========================================= */
 
+/* 1. Comment ça marche Carousel */
+.steps {
+  display: flex !important;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
+  list-style: none;
+}
+
+.steps > li {
+  flex: 0 0 280px; /* عرض كل كارت */
+  scroll-snap-align: start;
+}
+
+/* 2. Avis Clients (Testimonials) Carousel */
+.testimonials-grid {
+  display: flex !important;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.testimonial-card {
+  flex: 0 0 300px; /* عرض كارت التوصيات */
+  scroll-snap-align: start;
+}
+
+/* تحسين شكل الـ Scrollbar باش يجي أنيق */
+.steps::-webkit-scrollbar,
+.testimonials-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.steps::-webkit-scrollbar-track,
+.testimonials-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.steps::-webkit-scrollbar-thumb,
+.testimonials-grid::-webkit-scrollbar-thumb {
+  background: #111;
+  border-radius: 10px;
+}
