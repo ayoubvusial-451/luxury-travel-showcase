@@ -14,7 +14,7 @@ const CONFIG = {
 const CARS = [
   { id: 'clio',    name: 'Renault Clio',  type: 'Citadine', price: 250, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'images/Renault Clio.jfif' },
   { id: 'logan',   name: 'Dacia Logan',   type: 'Berline',  price: 280, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'images/The new Dacia Logan from 8,400 euros (1).jfif' },
-  { id: 'sandero', name: 'Dacia Sandero', type: 'Citadine', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: '' }
+  { id: 'sandero', name: 'Dacia Sandero', type: 'Citadine', price: 270, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'images/dacia-sandero-manual-gasoline.webp' }
 ];
 
 /* ---------- Utilitaires ---------- */
