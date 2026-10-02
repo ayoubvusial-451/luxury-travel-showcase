@@ -15,7 +15,7 @@ const CARS = [
   { id: 'clio',    name: 'Renault Clio',  type: 'Manuelle', price: 400, seats: 5, gearbox: 'Manuelle', ac: true, color: '#ecece6', image: 'images/clio.jpg' },
   { id: 'logan',   name: 'Dacia Logan',   type: 'Manuelle',  price: 350, seats: 5, gearbox: 'Manuelle', ac: true, color: '#8f99a3', image: 'images/images/Dacia_Logan.png' },
   { id: 'sandero', name: 'Dacia Sandero', type: 'Manuelle', price: 350, seats: 5, gearbox: 'Manuelle', ac: true, color: '#3d7be0', image: 'images/sandero.webp' },
-  { id: 'PEUGEOT 208', name: 'peugeot 208', type: 'Manuelle-auto', price: 350, seats: 5, gearbox: 'Manuelle-auto', ac: true, color: '#3d7be0', image: 'images/peugeot-208.webp' }
+  { id: 'PEUGEOT 208', name: 'peugeot 208', type: 'Manuelle-auto', price: 350, seats: 5, gearbox: 'Manuelle-auto', ac: true, color: '#3d7be0', image: 'images/images/images/peugeot-208.WEBP' }
 ];
 /* ---------- Utilitaires ---------- */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
