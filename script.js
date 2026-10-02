@@ -1,6 +1,6 @@
 /* HRS CAR — interactions */
 'use strict';
-const CONFIG={brand:'HRS CAR',whatsapp:'212661614048'};
+const CONFIG={brand:'ZIRRARI CAR',whatsapp:'212661614048'};
 const CARS=[
  {id:'clio',name:'Renault Clio',type:'Citadine',price:400,seats:5,gearbox:'Manuelle',ac:true,image:'images/clio.jpg'},
  {id:'logan',name:'Dacia Logan',type:'Berline',price:350,seats:5,gearbox:'Manuelle',ac:true,image:'images/images/Dacia_Logan.png'},
