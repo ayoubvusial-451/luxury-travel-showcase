@@ -14,11 +14,11 @@
 document.addEventListener('DOMContentLoaded',function(){
  const grid=document.querySelector('#car-grid'); if(!grid) return;
  const cars=[
- {name:'Renault Clio',type:'Manuelle-auto',price:400,image:'images/clio.jpg',gearbox:'Manuelle'},
- {name:'Dacia Logan',type:'Manuelle',price:350,image:'images/The new Dacia Logan from 8,400 euros.jfif',gearbox:'Manuelle'},
- {name:'Dacia Sandero',type:'Manuelle',price:350,image:'images/sandero.webp',gearbox:'Manuelle'},
- {name:'Peugeot 208',type:'Manuelle-auto',price:350,image:'images/peugeot-208.webp',gearbox:'Manuelle-auto'}
+ {slug:'dacia-logan',name:'Dacia Logan',type:'Berline',price:350,image:'images/The new Dacia Logan from 8,400 euros.jfif',gearbox:'Manuelle',seats:5},
+ {slug:'renault-clio',name:'Renault Clio',type:'Citadine',price:400,image:'images/clio.jpg',gearbox:'Manuelle',seats:5},
+ {slug:'dacia-sandero',name:'Dacia Sandero',type:'Citadine',price:350,image:'images/sandero.webp',gearbox:'Manuelle',seats:5},
+ {slug:'peugeot-208',name:'Peugeot 208',type:'Citadine',price:350,image:'images/peugeot-208.webp',gearbox:'Manuelle-auto',seats:5}
  ];
- grid.innerHTML=cars.map(c=>'<article class="car-card"><div class="car-media"><img src="'+c.image+'" alt="'+c.name+'" loading="lazy"><span class="badge">'+c.type+'</span></div><div class="car-body"><h3>'+c.name+'</h3><ul class="specs"><li>👤 5 places</li><li>⚙ '+c.gearbox+'</li><li>❄ Climatisation</li></ul><div class="car-foot"><div><p class="price"><strong>'+c.price+' DH</strong> <span>/ jour</span></p></div><a class="btn btn-dark" href="https://wa.me/212661614048?text='+encodeURIComponent('Bonjour ZIRRARI CAR, je souhaite réserver la '+c.name+' à '+c.price+' DH/jour. Est-elle disponible ?')+'" target="_blank" rel="noopener">Réserver</a></div></div></article>').join('');
+ grid.innerHTML=cars.map(c=>'<article class="car-card"><a class="car-media" href="vehicule.html?id='+c.slug+'"><img src="'+c.image+'" alt="'+c.name+'" loading="lazy"><span class="badge">'+c.type+'</span></a><div class="car-body"><h3>'+c.name+'</h3><ul class="specs"><li>👤 '+c.seats+' places</li><li>⚙ '+c.gearbox+'</li><li>❄ Climatisation</li></ul><div class="car-foot"><div><p class="price"><strong>'+c.price+' DH</strong> <span>/ jour</span></p></div><a class="btn btn-dark" href="vehicule.html?id='+c.slug+'">Voir le véhicule</a></div></div></article>').join('');
 });
 </script></body></html>
