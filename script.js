@@ -28,3 +28,17 @@ const nav=$('#nav'),burger=$('#burger');function setMenu(open){if(!nav||!burger)
 const revealItems=document.querySelectorAll('.reveal');if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target)}}),{threshold:.12});revealItems.forEach(el=>io.observe(el))}else revealItems.forEach(el=>el.classList.add('visible'));
 const year=$('#year');if(year)year.textContent=new Date().getFullYear();
 render();
+/* Mobile testimonials autoplay */
+(function(){
+  const slider=document.querySelector('.review-grid');
+  if(!slider || window.matchMedia('(max-width: 700px)').matches===false) return;
+  const cards=[...slider.querySelectorAll('.review-card')];
+  if(cards.length<2) return;
+  let index=0, timer;
+  const move=()=>{index=(index+1)%cards.length;slider.scrollTo({left:cards[index].offsetLeft-slider.offsetLeft,behavior:'smooth'});};
+  const start=()=>{clearInterval(timer);timer=setInterval(move,5000)};
+  const stop=()=>clearInterval(timer);
+  slider.addEventListener('mouseenter',stop);slider.addEventListener('mouseleave',start);
+  slider.addEventListener('touchstart',stop,{passive:true});slider.addEventListener('touchend',start,{passive:true});
+  start();
+})();
