@@ -42,3 +42,46 @@ render();
   slider.addEventListener('touchstart',stop,{passive:true});slider.addEventListener('touchend',start,{passive:true});
   start();
 })();
+
+function showVehicleDetail(){
+  if(!location.search.includes('vehicle=')) return;
+  const id=new URLSearchParams(location.search).get('vehicle')||'dacia-logan';
+  const cars={
+    'dacia-logan':{name:'Dacia Logan',type:'Berline',price:350,image:'images/The new Dacia Logan from 8,400 euros.jfif',gear:'Manuelle',desc:'Une berline pratique et confortable, adaptée aux déplacements quotidiens, aux trajets en famille et aux road trips au Maroc.'},
+    'renault-clio':{name:'Renault Clio',type:'Citadine',price:400,image:'images/clio.jpg',gear:'Manuelle',desc:'Une citadine polyvalente et agréable pour circuler en ville ou partir quelques jours à la découverte de la région.'},
+    'dacia-sandero':{name:'Dacia Sandero',type:'Citadine',price:350,image:'images/sandero.webp',gear:'Manuelle',desc:'Un modèle pratique et économique pour les trajets quotidiens, les escapades et les déplacements en famille.'},
+    'peugeot-208':{name:'Peugeot 208',type:'Citadine',price:350,image:'images/peugeot-208.webp',gear:'Manuelle-auto',desc:'Une citadine moderne et confortable, idéale pour les déplacements en ville et les trajets sur route.'}
+  };
+  const car=cars[id]||cars['dacia-logan'];
+  const main=document.querySelector('main');
+  if(!main) return;
+  document.title='ZIRRARI CAR | '+car.name;
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+  main.innerHTML=`
+  <section class="vehicle-hero"><div class="container vehicle-hero-grid">
+    <div class="vehicle-photo"><div class="vehicle-photo-inner"><img src="${car.image}" alt="${car.name}"></div><span class="badge">${car.type}</span></div>
+    <div class="vehicle-summary"><span class="eyebrow">ZIRRARI CAR · LOCATION</span><h1>${car.name}</h1>
+      <div class="vehicle-rate">Dès <strong>${car.price} DH</strong><span>/ jour</span></div>
+      <ul class="vehicle-spec-list"><li>👤 <strong>5 places</strong></li><li>⚙ <strong>${car.gear}</strong></li><li>🚪 <strong>4/5 portes</strong></li><li>❄ <strong>Climatisation</strong></li></ul>
+      <p>${car.desc}</p><a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/212661614048?text=${encodeURIComponent('Bonjour ZIRRARI CAR, je souhaite réserver la '+car.name+'. Est-elle disponible ?')}">Demander ce véhicule sur WhatsApp →</a>
+    </div></div></section>
+  <section class="section estimate-section"><div class="container"><div class="section-head center"><span class="eyebrow">ESTIMEZ VOTRE TARIF</span><h2>Calculez votre <em>budget.</em></h2><p>Tarif indicatif selon le nombre de jours.</p></div>
+    <div class="estimate-card"><div class="duration-buttons"><button data-days="1">1 jour</button><button data-days="3">3 jours</button><button data-days="7" class="active">7 jours</button><button data-days="14">14 jours</button><button data-days="30">30 jours</button></div>
+      <div class="estimate-row"><div><label>Nombre de jours</label><input id="vd-days" type="number" min="1" max="365" value="7"></div><div><span>Tarif journalier</span><strong>${car.price} DH / jour</strong></div><div><span>Total estimé</span><strong id="vd-total">${car.price*7} DH</strong></div></div>
+      <a id="vd-wa" class="btn btn-dark" target="_blank" rel="noopener">Confirmer sur WhatsApp →</a></div></div></section>
+  <section class="section section-soft"><div class="container"><div class="section-head"><span class="eyebrow">CE QUI EST INCLUS</span><h2>Dans votre location</h2></div><div class="ideal-grid"><article><span>01</span><h3>Véhicule préparé</h3><p>Voiture préparée avant la remise des clés.</p></article><article><span>02</span><h3>Climatisation</h3><p>Confort pour vos trajets au quotidien.</p></article><article><span>03</span><h3>Contact direct</h3><p>Une équipe joignable par téléphone et WhatsApp.</p></article></div></div></section>
+  <section class="section section-dark faq-section"><div class="container narrow"><div class="section-head center"><span class="eyebrow">QUESTIONS FRÉQUENTES</span><h2>Avant de <em>réserver.</em></h2></div><div class="faq-list">
+    <details open><summary>Comment réserver ?</summary><p>Envoyez vos dates et le véhicule souhaité sur WhatsApp. Nous confirmons ensuite la disponibilité et les conditions.</p></details>
+    <details><summary>La voiture est-elle disponible à mes dates ?</summary><p>La disponibilité doit être confirmée avec l'équipe ZIRRARI CAR pour vos dates exactes.</p></details>
+    <details><summary>Peut-on demander une livraison ?</summary><p>Une remise du véhicule peut être organisée selon disponibilité et l'adresse convenue.</p></details>
+  </div></div></section>
+  <section class="section"><div class="container"><div class="section-head center"><span class="eyebrow">BESOIN D'UNE AUTRE VOITURE ?</span><h2>Retour à <em>la flotte.</em></h2><p>Découvrez les autres modèles disponibles.</p><a class="btn btn-primary" href="voitures.html">Voir toutes les voitures →</a></div></div></section>`;
+  const money=n=>n.toLocaleString('fr-FR')+' DH';
+  const daysInput=document.querySelector('#vd-days'),total=document.querySelector('#vd-total'),wa=document.querySelector('#vd-wa');
+  function sync(n){n=Math.max(1,Math.min(365,Number(n)||1));daysInput.value=n;total.textContent=money(car.price*n);wa.href='https://wa.me/212661614048?text='+encodeURIComponent('Bonjour ZIRRARI CAR, je souhaite réserver la '+car.name+' pour '+n+' jour'+(n>1?'s':'')+', total estimé : '+car.price*n+' DH. Est-elle disponible ?')}
+  document.querySelectorAll('[data-days]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-days]').forEach(x=>x.classList.remove('active'));b.classList.add('active');sync(b.dataset.days)}));
+  daysInput.addEventListener('input',()=>{document.querySelectorAll('[data-days]').forEach(x=>x.classList.toggle('active',Number(x.dataset.days)===Number(daysInput.value)));sync(daysInput.value)});
+  sync(7);
+}
+
+showVehicleDetail();
