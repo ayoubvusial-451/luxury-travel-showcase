@@ -602,3 +602,13 @@ footer {
   color: #94a3b8;
   font-size: 0.9rem;
 }
+/* تغيير لون زر Réserver sur WhatsApp إلى الأخضر */
+.hero-cta .btn-lime {
+  background-color: #25d366 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.hero-cta .btn-lime:hover {
+  background-color: #128c7e !important;
+}
