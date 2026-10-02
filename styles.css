@@ -55,3 +55,9 @@
 .estimate-row strong{color:#d9302f!important}
 #estimated-total,#vd-total{color:#d9302f!important}
 .vehicle-summary .btn-primary{background:#111414}
+
+
+/* Fleet page: one vehicle card per row */
+.fleet-list{grid-template-columns:1fr!important;gap:24px;max-width:920px;margin:0 auto}
+.fleet-list .car-card{width:100%}
+@media(max-width:700px){.fleet-list{grid-template-columns:1fr!important;gap:16px}.fleet-list .car-media{height:230px}.fleet-list .car-body{padding:18px}.fleet-list .car-body h3{font-size:20px}.fleet-list .specs li{font-size:9px;padding:5px 8px}}
