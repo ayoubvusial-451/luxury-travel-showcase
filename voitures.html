@@ -19,6 +19,6 @@ document.addEventListener('DOMContentLoaded',function(){
  {slug:'dacia-sandero',name:'Dacia Sandero',type:'Citadine',price:350,image:'images/sandero.webp',gearbox:'Manuelle',seats:5},
  {slug:'peugeot-208',name:'Peugeot 208',type:'Citadine',price:350,image:'images/peugeot-208.webp',gearbox:'Manuelle-auto',seats:5}
  ];
- grid.innerHTML=cars.map(c=>'<article class="car-card"><a class="car-media" href="vehicule.html?id='+c.slug+'"><img src="'+c.image+'" alt="'+c.name+'" loading="lazy"><span class="badge">'+c.type+'</span></a><div class="car-body"><h3>'+c.name+'</h3><ul class="specs"><li>👤 '+c.seats+' places</li><li>⚙ '+c.gearbox+'</li><li>❄ Climatisation</li></ul><div class="car-foot"><div><p class="price"><strong>'+c.price+' DH</strong> <span>/ jour</span></p></div><a class="btn btn-dark" href="vehicule.html?id='+c.slug+'">Voir le véhicule</a></div></div></article>').join('');
+ grid.innerHTML=cars.map(c=>'<article class="car-card"><a class="car-media" href="?vehicle='+c.slug+'"><img src="'+c.image+'" alt="'+c.name+'" loading="lazy"><span class="badge">'+c.type+'</span></a><div class="car-body"><h3>'+c.name+'</h3><ul class="specs"><li>👤 '+c.seats+' places</li><li>⚙ '+c.gearbox+'</li><li>❄ Climatisation</li></ul><div class="car-foot"><div><p class="price"><strong>'+c.price+' DH</strong> <span>/ jour</span></p></div><a class="btn btn-dark" href="?vehicle='+c.slug+'">Voir le véhicule</a></div></div></article>').join('');
 });
 </script></body></html>
