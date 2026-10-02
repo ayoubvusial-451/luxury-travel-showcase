@@ -601,6 +601,27 @@ footer {
   border-top: 1px solid #334155;
   color: #94a3b8;
   font-size: 0.9rem;
+   /* تنسيق الـ Footer وتثبيته في أسفل الصفحة */
+footer {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  padding: 40px 20px 30px !important;
+  text-align: center !important;
+  margin-top: 60px !important;
+  clear: both;
+}
+
+footer p, 
+footer div, 
+footer span, 
+footer a {
+  color: #94a3b8 !important;
+  font-size: 0.95rem !important;
+  margin: 6px 0 !important;
+}
+
+footer a:hover {
+  color: #25d366 !important;
 }
 /* تغيير لون زر Réserver sur WhatsApp إلى الأخضر */
 .hero-cta .btn-lime {
