@@ -57,7 +57,10 @@
 .vehicle-summary .btn-primary{background:#111414}
 
 
-/* Fleet page: one vehicle card per row */
-.fleet-list{grid-template-columns:1fr!important;gap:24px;max-width:920px;margin:0 auto}
-.fleet-list .car-card{width:100%}
-@media(max-width:700px){.fleet-list{grid-template-columns:1fr!important;gap:16px}.fleet-list .car-media{height:230px}.fleet-list .car-body{padding:18px}.fleet-list .car-body h3{font-size:20px}.fleet-list .specs li{font-size:9px;padding:5px 8px}}
+
+
+/* Fleet display: one vehicle per row */
+.home-cars,.fleet-list{grid-template-columns:1fr!important;gap:24px;max-width:920px;margin-left:auto;margin-right:auto}
+.home-cars .car-card,.fleet-list .car-card{width:100%}
+@media(max-width:700px){.home-cars,.fleet-list{grid-template-columns:1fr!important;gap:16px}.home-cars .car-media,.fleet-list .car-media{height:230px}.home-cars .car-body,.fleet-list .car-body{padding:18px}.home-cars .car-body h3,.fleet-list .car-body h3{font-size:20px}.home-cars .specs li,.fleet-list .specs li{font-size:9px;padding:5px 8px}}
+/* Vehicle transmission labels */
