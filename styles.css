@@ -578,50 +578,136 @@ ul, ol { padding: 0; list-style: none; }
   width: 35px;
   height: 35px;
 }
-/* تنسيق الـ Footer */
-footer {
-  background-color: #0f172a;
-  color: #f8fafc;
-  padding: 45px 20px 20px;
+/* ==========================================
+   FOOTER STYLES - CLEAN & RESPONSIVE
+   ========================================== */
+.main-footer {
+  background-color: #0b1329 !important;
+  color: #e2e8f0 !important;
+  padding: 60px 20px 20px !important;
+  margin-top: 80px !important;
+  border-top: 3px solid #25d366;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.footer-content {
+.footer-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 30px;
+  gap: 40px; /* مسافة مريحة بين الأعمدة */
+  padding-bottom: 40px;
 }
 
-.footer-bottom {
-  text-align: center;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #334155;
+/* تنظيم الأعمدة فـ الـ PC */
+.footer-col {
+  flex: 1 1 220px; /* كل عمود وياخد مساحته */
+  min-width: 220px;
+  margin-bottom: 20px;
+}
+
+.footer-col h3 {
+  color: #ffffff !important;
+  font-size: 1.15rem !important;
+  font-weight: 600;
+  margin-bottom: 22px !important;
+  position: relative;
+  display: inline-block;
+}
+
+/* خط أخضر تحت كل عنوان */
+.footer-col h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 35px;
+  height: 3px;
+  background-color: #25d366;
+  border-radius: 2px;
+}
+
+.footer-col p {
+  font-size: 0.95rem;
   color: #94a3b8;
-  font-size: 0.9rem;
-   /* تنسيق الـ Footer وتثبيته في أسفل الصفحة */
-footer {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  padding: 40px 20px 30px !important;
-  text-align: center !important;
-  margin-top: 60px !important;
-  clear: both;
+  line-height: 1.7;
+  margin: 0 0 10px 0;
 }
 
-footer p, 
-footer div, 
-footer span, 
-footer a {
+.footer-col ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.footer-col ul li {
+  margin-bottom: 14px !important; /* مساحة نقية بين الروابط */
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.footer-col a {
   color: #94a3b8 !important;
-  font-size: 0.95rem !important;
-  margin: 6px 0 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
 }
 
-footer a:hover {
+.footer-col a:hover {
   color: #25d366 !important;
+  transform: translateX(3px); /* حركة خفيفة عند تحريك الماوس */
+}
+
+/* زر Google Maps */
+.map-link-btn {
+  display: inline-block;
+  background-color: #1e293b;
+  color: #25d366 !important;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem !important;
+  border: 1px solid #334155;
+  margin-top: 5px;
+}
+
+.map-link-btn:hover {
+  background-color: #25d366 !important;
+  color: #ffffff !important;
+  transform: none !important;
+}
+
+/* Copyright line */
+.footer-bottom {
+  border-top: 1px solid #1e293b;
+  padding-top: 25px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.footer-bottom p {
+  color: #64748b;
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+/* Responsive - التنسيق الخاص بالموبايل */
+@media (max-width: 768px) {
+  .main-footer {
+    padding: 40px 15px 20px !important;
+    margin-top: 50px !important;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 /* تغيير لون زر Réserver sur WhatsApp إلى الأخضر */
 .hero-cta .btn-lime {
